@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="et">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sild — Science Translation, Estonian ⇄ English</title>
+<title>Realbon translation — Estonian ⇄ English</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23D02020'/><text x='32' y='47' font-family='Georgia,serif' font-size='44' font-weight='600' text-anchor='middle' fill='white'>S</text></svg>">
-<meta name="description" content="Science, medicine and technology translation between Estonian and English, by a translator who does it daily for a major Estonian newspaper.">
+<meta name="description" content="Science, medicine, technology, culture and varia translation between Estonian and English, by a translator who does it daily for a major Estonian newspaper.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -177,7 +177,7 @@
 
 <header>
   <div class="wrap nav">
-    <a class="wordmark" href="#">Sild<span>.</span></a>
+    <a class="wordmark" href="#"><span data-et="Realbon tõlked" data-en="Realbon translation">Realbon translation</span><span>.</span></a>
     <div class="nav-right">
       <a class="nav-link" href="#sample" data-et="Näidis" data-en="Sample">Sample</a>
       <a class="nav-link" href="#process" data-et="Protsess" data-en="Process">Process</a>
@@ -311,13 +311,13 @@
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Sild</span>
+    <span data-et="© 2026 Realbon tõlked" data-en="© 2026 Realbon translation">© 2026 Realbon translation</span>
   </div>
 </footer>
 
 <script>
   // Full-page language toggle: the page is its own translation sample.
-  let lang = 'en';
+  let lang = 'et';
   function applyLang(){
     document.documentElement.lang = lang;
     document.querySelectorAll('[data-et]').forEach(el=>{
@@ -327,6 +327,7 @@
     document.getElementById('btn-en').setAttribute('aria-pressed', lang==='en');
     document.getElementById('btn-et').setAttribute('aria-pressed', lang==='et');
   }
+  applyLang();
   function setLang(l){
     if (l === lang) return;
     lang = l;

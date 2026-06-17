@@ -22,12 +22,13 @@
     --max:1100px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth;scrollbar-gutter:stable}
+  html{scroll-behavior:smooth;scrollbar-gutter:stable;overflow-x:hidden}
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     *,*::before,*::after{animation:none!important;transition:none!important}
   }
   body{
+    overflow-x:hidden;
     background:var(--paper);
     color:var(--ink);
     font-family:'IBM Plex Sans',system-ui,sans-serif;

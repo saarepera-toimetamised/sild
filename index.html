@@ -7,6 +7,10 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23D02020'/><text x='32' y='47' font-family='Georgia,serif' font-size='44' font-weight='600' text-anchor='middle' fill='white'>R</text></svg>">
 <meta name="description" content="Isiklik tõlkebüroo Tallinnas: teadus-, meditsiini-, tehnoloogia- ja kultuuritekstide tõlge eesti keelest inglise keelde ja vastupidi. Hinnapakkumine sama tööpäeva jooksul.">
 <link rel="canonical" href="https://tolked.realbon.eu/">
+<link rel="alternate" hreflang="et" href="https://tolked.realbon.eu/">
+<link rel="alternate" hreflang="en" href="https://tolked.realbon.eu/en/">
+<link rel="alternate" hreflang="x-default" href="https://tolked.realbon.eu/">
+<script defer src="/_vercel/insights/script.js"></script>
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tolked.realbon.eu/">
 <meta property="og:title" content="Realbon tõlked — sinu isiklik tõlkebüroo">
@@ -209,8 +213,8 @@
       <a class="nav-link" href="#process" data-et="Protsess" data-en="Process">Protsess</a>
       <a class="nav-link" href="#contact" data-et="Kontakt" data-en="Contact">Kontakt</a>
       <div class="lang-toggle" role="group" aria-label="Page language">
-        <button id="btn-en" aria-pressed="true" onclick="setLang('en')">EN</button>
-        <button id="btn-et" aria-pressed="false" onclick="setLang('et')">ET</button>
+        <button id="btn-en" aria-pressed="false" onclick="setLang('en')">EN</button>
+        <button id="btn-et" aria-pressed="true" onclick="setLang('et')">ET</button>
       </div>
     </div>
   </div>
@@ -318,7 +322,7 @@
         <div>
           <h2 data-et="Räägime teie tekstist" data-en="Let's talk about your text">Räägime teie tekstist</h2>
           <p class="lead" data-et="Saatke tekst või kirjeldage projekti — vastan hinnapakkumisega sama tööpäeva jooksul." data-en="Send your text or describe the project — I'll reply with a quote within the same working day.">Saatke tekst või kirjeldage projekti — vastan hinnapakkumisega sama tööpäeva jooksul.</p>
-          <a class="btn btn-primary" href="mailto:toomassaarepera@realbon.eu?subject=Translation%20quote%20request" data-et="Kirjuta mulle" data-en="Email me">Kirjuta mulle</a>
+          <a id="mail-btn" class="btn btn-primary" href="mailto:toomassaarepera@realbon.eu?subject=Hinnap%C3%A4ring" data-et="Kirjuta mulle" data-en="Email me">Kirjuta mulle</a>
         </div>
         <div class="contact-meta">
           <strong>toomassaarepera@realbon.eu</strong><br>
@@ -339,7 +343,7 @@
 
 <script>
   // Full-page language toggle: the page is its own translation sample.
-  let lang = 'et';
+  let lang = document.documentElement.lang === 'en' ? 'en' : 'et';
   // Touch screens have no hover: tell visitors to tap instead.
   const noHover = window.matchMedia('(hover: none)').matches;
   if (noHover){
@@ -353,6 +357,8 @@
       const txt = el.getAttribute('data-' + lang);
       if (txt !== null) el.innerHTML = txt.replaceAll('&lt;','<').replaceAll('&gt;','>');
     });
+    document.getElementById('mail-btn').href = 'mailto:toomassaarepera@realbon.eu?subject=' +
+      encodeURIComponent(lang === 'en' ? 'Translation quote request' : 'Hinnapäring');
     document.getElementById('btn-en').setAttribute('aria-pressed', lang==='en');
     document.getElementById('btn-et').setAttribute('aria-pressed', lang==='et');
   }

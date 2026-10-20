@@ -216,7 +216,7 @@
     <div class="wrap">
       <div class="section-head">
         <h2 data-et="Vaata näidist" data-en="Side by side, sentence by sentence">Side by side, sentence by sentence</h2>
-        <p data-et="Hea tõlge ei tõlgi sõnu, vaid tähendust — terminitäpselt ja loetavalt. Liigu hiirega lausete kohal, et näha vastavusi."
+        <p id="parallel-intro" data-et="Hea tõlge ei tõlgi sõnu, vaid tähendust — terminitäpselt ja loetavalt. Liigu hiirega lausete kohal, et näha vastavusi."
            data-en="Good translation carries meaning, not just words — terminologically exact and readable. Hover over a sentence to see its pair.">
           Good science translation carries meaning, not just words — terminologically exact and readable. Hover over a sentence to see its pair.</p>
       </div>
@@ -244,10 +244,6 @@
 
   <section class="proof">
     <div class="wrap">
-      <div class="section-head">
-        <h2 data-et="Miks just mina" data-en="Why me">Why me</h2>
-        <p data-et="See ei ole kõrvaltegevus huvilisele — see on minu igapäevatöö." data-en="This isn't a hobbyist's side project — it's what I do for a living, daily.">This isn't a hobbyist's side project — it's what I do for a living, daily.</p>
-      </div>
       <div class="proof-grid">
         <div class="proof-card">
           <h3 data-et="Iga päev trükis" data-en="In print every day">In print every day</h3>
@@ -255,7 +251,7 @@
         </div>
         <div class="proof-card">
           <h3 data-et="Inimene + tööriistad" data-en="Human + tooling">Human + tooling</h3>
-          <p data-et="Kasutan enda ehitatud tõlketöövoogu, mis kiirendab tööd — kuid iga lause vaatab üle inimene, kes tunneb valdkonna termineid." data-en="I use a translation pipeline I built myself for speed — but every sentence is reviewed by a human who knows the field's terminology.">I use a translation pipeline I built myself for speed — but every sentence is reviewed by a human who knows the field's terminology.</p>
+          <p data-et="Kasutan enda ehitatud tõlketöövoogu, mis kiirendab tööd — kuid iga lause vaatab üle inimene." data-en="I use a translation pipeline I built myself for speed — but every sentence is reviewed by a human.">I use a translation pipeline I built myself for speed — but every sentence is reviewed by a human.</p>
         </div>
         <div class="proof-card">
           <h3 data-et="Mõlemad suunad" data-en="Both directions">Both directions</h3>
@@ -297,10 +293,10 @@
         <div>
           <h2 data-et="Räägime teie tekstist" data-en="Let's talk about your text">Let's talk about your text</h2>
           <p class="lead" data-et="Saatke tekst või kirjeldage projekti — vastan hinnapakkumisega sama tööpäeva jooksul." data-en="Send your text or describe the project — I'll reply with a quote within the same working day.">Send your text or describe the project — I'll reply with a quote within the same working day.</p>
-          <a class="btn btn-primary" href="mailto:toomas@realbon.ee?subject=Translation%20quote%20request" data-et="Kirjuta mulle" data-en="Email me">Email me</a>
+          <a class="btn btn-primary" href="mailto:toomassaarepera@realbon.eu?subject=Translation%20quote%20request" data-et="Kirjuta mulle" data-en="Email me">Email me</a>
         </div>
         <div class="contact-meta">
-          <strong>toomas@realbon.ee</strong><br>
+          <strong>toomassaarepera@realbon.eu</strong><br>
           <span data-et="Tallinn, Eesti" data-en="Tallinn, Estonia">Tallinn, Estonia</span><br>
           EE ⇄ EN<br>
           <span data-et="Hinnapakkumine 1 tööpäeva jooksul" data-en="Quotes within 1 working day">Quotes within 1 working day</span>
@@ -319,6 +315,13 @@
 <script>
   // Full-page language toggle: the page is its own translation sample.
   let lang = 'et';
+  // Touch screens have no hover: tell visitors to tap instead.
+  const noHover = window.matchMedia('(hover: none)').matches;
+  if (noHover){
+    const intro = document.getElementById('parallel-intro');
+    intro.setAttribute('data-et', intro.getAttribute('data-et').replace('Liigu hiirega lausete kohal', 'Puuduta lauset'));
+    intro.setAttribute('data-en', intro.getAttribute('data-en').replace('Hover over a sentence', 'Tap a sentence'));
+  }
   function applyLang(){
     document.documentElement.lang = lang;
     document.querySelectorAll('[data-et]').forEach(el=>{
@@ -344,6 +347,11 @@
     const mates = document.querySelectorAll('.parallel .s[data-pair="'+pair+'"]');
     s.addEventListener('mouseenter', ()=>mates.forEach(m=>m.classList.add('hl')));
     s.addEventListener('mouseleave', ()=>mates.forEach(m=>m.classList.remove('hl')));
+    // Tap support: highlight this pair, clear the others.
+    s.addEventListener('click', ()=>{
+      document.querySelectorAll('.parallel .s.hl').forEach(m=>m.classList.remove('hl'));
+      mates.forEach(m=>m.classList.add('hl'));
+    });
   });
 </script>
 </body>
